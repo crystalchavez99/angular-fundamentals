@@ -1,6 +1,6 @@
 <p>sales-person-list works!</p>
+<table class="table">
 
-<table class="table table-hover">
     <thead class="table-dark">
         <tr>
             <th>First Name</th>
@@ -10,19 +10,22 @@
             <th>Met Quota?</th>
         </tr>
     </thead>
-    <!-- *ngFor will loop over the array -->
+ <!-- *ngFor will loop over the array -->
     <!-- *ngIf is a if/else conditional-->
     <!--angular pips allow data to a pipe for formatting, such as currency formatting-->
     <tbody>
-        <tr *ngFor="let tempSalesPerson of salesPersonList">
-            <td>{{tempSalesPerson.firstName}}</td>
-            <td>{{tempSalesPerson.lastName}}</td>
-            <td>{{tempSalesPerson.email}}</td>
-            <td>{{tempSalesPerson.salesVolume | currency: 'USD'}}</td>
+        <tr *ngFor="let tempSalesPerson of salesPersonList" [ngClass]="{'highlight': tempSalesPerson.salesVolume >= 60000}">
+            <td>{{ tempSalesPerson.firstName }}</td>
+            <td>{{ tempSalesPerson.lastName }}</td>
+            <td>{{ tempSalesPerson.email }}</td>
+            <td>{{ tempSalesPerson.salesVolume | currency:'USD'}}</td>
+
             <td>
-                <div *ngIf="tempSalesPerson.salesVolume >=60000; else myElseBlock">Yes</div>
+                <div *ngIf="tempSalesPerson.salesVolume >= 60000; else myElseBlock">Yes</div>
                 <ng-template #myElseBlock>No</ng-template>
             </td>
         </tr>
+
     </tbody>
+
 </table>
